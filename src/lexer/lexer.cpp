@@ -15,7 +15,7 @@ std::unordered_map<std::string, TokenType> operatorTypes{
 
 std::vector<Token> Lexer::Tokenize() {
     std::vector<Token> result;
-    std::unordered_set<char> operators = {'=', '+', '-', '/', '*', '<', '>', '(', ')'};
+    std::unordered_set<char> const operators = {'=', '+', '-', '/', '*', '<', '>', '(', ')'};
     while (position != text.length()) {
         if (isspace(text[position])) {
             position++;
@@ -43,42 +43,42 @@ Token Lexer::TokenizeNumber() {
         position++;
     }
     if (!isalpha(text[position])) {
-        return Token(TokenType::INT, tokenText);
+        return {TokenType::INT, tokenText};
     }
     throw std::runtime_error("error tokenizing NUMBER");
 }
 
 Token Lexer::TokenizeVarOrKeyword() {
     std::string tokenText;
-    std::unordered_set<std::string> keywords = {"if", "fi", "then", "while", "do", "done"};
+    std::unordered_set<std::string> const keywords = {"if", "fi", "then", "while", "do", "done"};
     while (isalpha(text[position]) || isdigit(text[position])) {
         tokenText += text[position];
         position++;
     }
     if (keywords.count(tokenText)) {
         if (!isalpha(text[position] && !isdigit(text[position]))) {
-            return Token(keywordTypes.at(tokenText), tokenText);
+            return {keywordTypes.at(tokenText), tokenText};
         } else {
             std::cout << tokenText;
             throw std::runtime_error("error tokenizing VAR or KEYWORD");
         }
     }
-    return Token(TokenType::VAR, tokenText);
+    return {TokenType::VAR, tokenText};
 }
 
 Token Lexer::TokenizeSemicol() {
     position++;
-    return Token(TokenType::SEMICOL, ";");
+    return {TokenType::SEMICOL, ";"};
 }
 
 Token Lexer::TokenizeOperator() {
     std::string tokenText;
     tokenText += text[position];
     position++;
-    return Token(operatorTypes.at(tokenText), tokenText);
+    return {operatorTypes.at(tokenText), tokenText};
 }
 
-Lexer::Lexer(std::string filename) {
+Lexer::Lexer(std::string const& filename) {
     std::ifstream file(filename);
     if (!file) {
         throw std::runtime_error("Error, while processing file");

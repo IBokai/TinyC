@@ -8,7 +8,7 @@
 
 class Lexer {
 public:
-    Lexer(std::string filename);
+    explicit Lexer(std::string const& filename);
     std::vector<Token> Tokenize();
 
 private:
@@ -17,6 +17,6 @@ private:
     Token TokenizeSemicol();
     Token TokenizeOperator();
     std::string text;
-    int position;
+    size_t position;
 };
 #endif
