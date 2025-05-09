@@ -14,7 +14,7 @@ public:
 private:
     Token TokenizeNumber();
     Token TokenizeVarOrKeyword();
-    Token TokenizeSemicol();
+    Token TokenizeSemicolon();
     Token TokenizeOperator();
     std::string text;
     size_t position;
