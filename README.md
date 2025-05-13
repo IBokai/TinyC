@@ -1,2 +1,5 @@
-# TinyC
-Tiny compiler of C-like language to RISC-V assembly code
+# MiniLang
+Tiny compiler of a simple programming language to RISC-V assembly code
+
+# Note 
+MiniLang is a temporary name
