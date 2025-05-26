@@ -21,7 +21,8 @@ enum class TokenType {
     DIVIDE,
     SEMICOL,
     RPAREN,
-    LPAREN
+    LPAREN,
+    ENDFILE
 };
 
 class Token {
